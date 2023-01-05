@@ -1,0 +1,82 @@
+
+LEVEL ORDER TRAVERSAL
+WE USE QUEUE DS AND STORING ELE USING VECTOR
+FIRST push root in queue and pop top of element then whe check if left and right exist of that then push in queue
+
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>>ans;
+    queue<TreeNode*>q;
+        q.push(root);
+        if(root==NULL)
+            return ans;
+        while(!q.empty())
+        {
+            vector<int>v;
+            int s=q.size();
+            for(int i=0;i<s;i++)
+            {
+                TreeNode*node=q.front();
+                q.pop();
+                if(node->left!=NULL)
+                    q.push(node->left);
+                if(node->right!=NULL)
+                    q.push(node->right);
+                v.push_back(node->val);
+            }
+            ans.push_back(v);
+        }
+        return ans;
+    }
+    
+    PREORDER TRAVERSAL
+    int this we use stack first put root in stack and print top ele of stack and pop it 
+    after that we push first right and left of node becoz we print top element
+    
+      vector<int> preorderTraversal(TreeNode* root) {
+     vector<int>ans;
+        if(root==NULL)
+            return ans;
+     stack<TreeNode*>s;
+        s.push(root);
+        while(!s.empty())
+        {
+            TreeNode*node=s.top();
+            s.pop();
+            ans.push_back(node->val);
+            if(node->right!=NULL)
+                s.push(node->right);
+            if(node->left!=NULL)
+                s.push(node->left);
+            
+        }
+        return ans;
+        }
+        
+      POSTORDER TRAVERSAL
+      in this we use two stack start from root and put in stack1 and pop top of ele and put into stack2
+      and left and right of top element exist then put into stack one 
+      after that while st2 is not empty pri nt out of that element
+      
+     vector<int> postorderTraversal(TreeNode* root) {
+     vector<int>ans;
+        if(root==NULL)
+            return ans;
+        stack<TreeNode*>st1,st2;
+        st1.push(root);
+        while(!st1.empty())
+        {
+            TreeNode*node=st1.top();
+            st1.pop();
+            st2.push(node);
+            if(node->left!=NULL)
+                st1.push(node->left);
+            if(node->right!=NULL)
+                st1.push(node->right);
+        }
+        while(!st2.empty())
+        {
+            ans.push_back(st2.top()->val);
+            st2.pop();
+        }
+        return  ans;
+    }
