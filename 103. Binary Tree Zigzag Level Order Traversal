@@ -1,0 +1,36 @@
+three line changes in level order
+take a flag variable every time we go to next level change the flag 1 to 0 ..lefttoright=!lefttoright
+and val take right to left using this  int index=(leftToRight)?i:(size-1-i); row[index]=temp->val; and one more thing is take size in vector.. vector<int>row(size);
+               
+
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>>result;
+        if(root==NULL)
+            return result;
+        queue<TreeNode*>q;
+        q.push(root);
+        bool leftToRight=true;
+        while(!q.empty())
+        {
+            int size=q.size();
+            vector<int>row(size);
+            for(int i=0;i<size;i++)
+            {
+               TreeNode*temp=q.front();
+                q.pop();
+                int index=(leftToRight)?i:(size-1-i);
+                row[index]=temp->val;
+                if(temp->left)
+                {
+                    q.push(temp->left);
+                }
+                if(temp->right)
+                {
+                    q.push(temp->right);
+                }
+            }
+             leftToRight=!leftToRight;
+            result.push_back(row);
+        }
+        return result;
+    }
