@@ -1,0 +1,53 @@
+ceil 
+Returns the smallest integer that is greater than or equal to x 
+Input : 2.5,2.9
+Output : 3,3
+  t(c)/s(c)=o(logn) height of bst
+int findCeil(Node* root, int input) {
+    int ceil=-1;
+    while(root!=NULL)
+    {
+        if(root->data==input)
+        {
+            ceil=root->data;
+            return ceil;
+        }
+        if(root->data<input)
+          root=root->right;
+          else
+          {
+              ceil=root->data;
+              root=root->left;
+          }
+    }
+    return ceil;
+}
+
+
+floor
+Returns the largest integer that is smaller than or equal to x 
+Input : 2.5,2.9
+Output : 2,2
+
+
+int floor(Node* root, int x) {
+    int val=-1;
+ while(root!=NULL)
+ {
+     if(root->data==x)
+     {
+         val=root->data;
+         return val;
+     }
+      if(root->data>x)
+     {
+         root=root->left;
+     }
+     else
+     {
+         val=root->data;
+         root=root->right;
+     }
+ }
+ return val;
+}
