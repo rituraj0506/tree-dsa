@@ -1,0 +1,19 @@
+brf  store inorder in vector and find first greater using linear search t(c)=o(n) s(c)=o(n)
+
+optimal apporch t(c)=o(n) s(c)=o(1);
+
+Node * inOrderSuccessor(Node *root, Node *x)
+    {
+      Node*succesor=NULL;
+      while(root!=NULL)
+      {
+          if(root->data<=x->data)
+          root=root->right;
+          else
+          {
+              succesor=root;
+              root=root->left;
+          }
+      }
+      return succesor;
+    }
