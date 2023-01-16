@@ -1,0 +1,16 @@
+ void dfs(TreeNode*root,vector<int>&v)
+    {
+        if(root==NULL) return;
+        if(root->left==NULL&&root->right==NULL)
+            v.push_back(root->val);
+        dfs(root->left,v);
+        dfs(root->right,v);
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        vector<int>v1,v2;
+        dfs(root1,v1); // apporch first we go to root1 store all leaf node val in v1
+        dfs(root2,v2);//after we go to root2 store all leaf node val in v2
+        return v1==v2;// if both equal return true otherwise false
+    }
+    t(c)=o(n)
+    s(c)=o(n) recursion stack space
