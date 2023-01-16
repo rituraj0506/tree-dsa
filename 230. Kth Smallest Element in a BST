@@ -1,0 +1,40 @@
+brute force store in vector using any traversal after that check using max heap  t(c)=o(n)+o(nlogk)
+vector<int>ans;
+    int ksmall(vector<int>&ans,int k)
+    {
+        priority_queue<int>maxh;
+        for(int i=0;i<ans.size();i++)
+        {
+            maxh.push(ans[i]);
+            if(maxh.size()>k)
+                maxh.pop();
+        }
+        return maxh.top();
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        if(root==NULL) return 0;
+        ans.push_back(root->val);
+        kthSmallest(root->left,k);
+        kthSmallest(root->right,k); 
+       return  ksmall(ans,k);
+        
+    }
+
+
+efficient apporch using in order bst t(c)=(n) s(c)=o(1)
+ int c=0,res=0;
+    void inorder(TreeNode*root,int k)
+    {
+        if(root==NULL)
+            return ;
+        inorder(root->left,k);
+        c++;
+        if(c==k)
+        res=root->val;
+        inorder(root->right,k);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+         inorder(root,k);
+        return res;
+    
+    }
