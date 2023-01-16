@@ -1,0 +1,17 @@
+  Brute force way for every node we find left and right height height then find max of it 
+  t(c)=O(n^2) s(c)=o(n) // recursion stack space
+  
+  optimal apporch t(c)=O(n) s(c)=O(n)
+  int finddiameter(TreeNode*root,int &diameter)
+    {
+        if(root==NULL) return 0;
+        int leftheight=finddiameter(root->left,diameter);
+        int rightheight=finddiameter(root->right,diameter);
+        diameter=max(diameter,leftheight+rightheight);
+        return 1 +max(leftheight,rightheight);
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int diameter=0;
+        finddiameter(root,diameter);
+        return diameter;
+    }
