@@ -1,0 +1,12 @@
+ 
+ t(c)=o(n) s(c)=o(1)
+ bool checkbst(TreeNode*root,long min,long max)
+    {
+        if(root==NULL)
+            return true;
+        if(root->val>=max||root->val<=min) return false;
+        return checkbst(root->left,min,root->val)&&checkbst(root->right,root->val,max);
+    }
+    bool isValidBST(TreeNode* root) {
+       return checkbst(root,LONG_MIN,LONG_MAX);  // between in range
+    }
