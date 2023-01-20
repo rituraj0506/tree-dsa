@@ -1,0 +1,36 @@
+  TreeNode* reverseOddLevels(TreeNode* root) {
+      int level=0;
+        if(root==NULL) return root;
+        queue<pair<TreeNode*,int>>q;
+        q.push({root,0});
+        while(!q.empty())
+        {
+            int s=q.size();
+             int lvl=q.front().second;
+            vector<TreeNode*>v;
+            for(int i=0;i<s;i++)
+            {
+                TreeNode*node=q.front().first;
+                q.pop();
+                if(lvl%2==1)
+                v.push_back(node);
+                if(node->left!=NULL)
+                    q.push({node->left,lvl+1});
+                if(node->right!=NULL)
+                    q.push({node->right,lvl+1});
+            }
+            int n=v.size();
+            int i=0,j=n-1;
+            while(i<j)
+            {
+                swap(v[i]->val,v[j]->val);
+                i++;
+                j--;
+            }
+            
+        }
+        return root;
+    }
+    
+    t(c)=o(n)
+    s(c)=o(n)
