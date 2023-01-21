@@ -1,0 +1,25 @@
+int findBottomLeftValue(TreeNode* root) {
+        int res=0;
+        vector<int>ans;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty())
+        {
+        int s=q.size();
+            res=q.front()->val; // for each level always store first left side val
+            cout<<res<<" ";
+      for(int i=0;i<s;i++)
+        {
+           TreeNode*node=q.front();
+           q.pop();
+          if(node->left!=NULL)
+              q.push(node->left);
+          if(node->right!=NULL)
+              q.push(node->right);
+          ans.push_back(node->val);
+         }
+            
+        }
+        return res;
+    } 
+    t(c) same as level order traversal
