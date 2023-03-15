@@ -16,9 +16,9 @@ Therefore, sum = 12 + 13 = 25.
     {
         if(root==NULL)
             return;
+              int add=ind*10+root->val;
         if(root->left==NULL&&root->right==NULL)
         {
-            int add=ind*10+root->val;
             sum+=add;
             return;
         }
