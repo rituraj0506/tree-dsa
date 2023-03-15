@@ -1,0 +1,45 @@
+Given the root of a binary tree, determine if it is a complete binary tree.
+In a complete binary tree, every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as 
+possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+Example 1:
+Input: root = [1,2,3,4,5,6]
+Output: true
+Explanation: Every level before the last is full (ie. levels with node-values {1} and {2, 3}), and all nodes in the last level ({4, 5, 6}) are as far left as possible.
+
+approch: count total node in tree after that we use level order traversal and check any node is null then we break from that if count1 is less than total node return 
+false otherwise return true;
+
+  int findt(TreeNode*root,int &c)
+    {
+        if(root==NULL)
+            return 0;
+        c++;
+        findt(root->left,c);
+        findt(root->right,c);
+        return c;
+    }
+    bool isCompleteTree(TreeNode* root) {
+         int c=0;
+        int total=findt(root,c);
+        cout<<total;
+        int c1=0;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty())
+        {
+            TreeNode*node=q.front();
+            q.pop();
+            if(node==NULL)
+            {
+                break;
+            }
+            c1++;
+            q.push(node->left);
+            q.push(node->right);
+        }
+        cout<<c1;
+        if(c1<total) return false;
+        else
+            return true;
+    }
