@@ -1,0 +1,36 @@
+  // also known as inorder traversal but it takes
+  t(c)=o(n)
+  s(c)=o(1)
+  
+  vector<int> inorderTraversal(TreeNode* root) {
+     // morris traversal
+        vector<int>res;
+        TreeNode*curr=root;  // becoz we want root cannot be destroyed
+        while(curr!=NULL)
+        {
+          if(curr->left==NULL){ // if left not exist
+                res.push_back(curr->val);
+                curr=curr->right;
+        }
+            else // if it is exist then i go to last right of subtree
+            {
+                TreeNode*prev=curr->left;
+                while(prev->right && prev->right!=curr) // i go to to last right
+                {
+                  prev=prev->right;
+                }
+                if(prev->right==NULL)
+                {
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+                else// from two where you go left or right in left it points itself so cut the link and go to right
+                {
+                    curr->left=NULL;
+                    res.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
+        }
+        return res;
+    }
