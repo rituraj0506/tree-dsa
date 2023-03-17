@@ -1,3 +1,5 @@
+ apporch: the moment you go to any node part of lca like 4 lca(4,7)=2 return that instead of go to left and right if both give nuLl return dirctly null
+ 
  TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root==NULL||root==p||root==q)
             return root;
