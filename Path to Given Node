@@ -1,0 +1,42 @@
+Given a Binary Tree A containing N nodes.
+You need to find the path from Root to a given node B.
+
+NOTE:
+No two nodes in the tree have same data values.
+You can assume that B is present in the tree A and a path always exists.
+Input 1:
+ A =
+           1
+         /   \
+        2     3
+       / \   / \
+      4   5 6   7 
+B = 5
+Output 1:
+ [1, 2, 5]
+
+bool fun(TreeNode*A,vector<int>&ans,int B)
+ {
+     if(A==NULL)
+     return false; // if both side NULL
+     ans.push_back(A->val);
+     
+     if(A->val==B) // we got the ans so return true
+     return true;
+     
+     if(fun(A->left,ans,B)||fun(A->right,ans,B))
+       return true; // if any one gives true go back without remove;     
+       
+       ans.pop_back();
+       return false;// if any of left or right gives true return otherwise false 
+ }
+vector<int> Solution::solve(TreeNode* A, int B) {
+    vector<int>ans;
+    if(A==NULL)
+    return ans; // we did not get any path
+    fun(A,ans,B);
+    return ans;
+}
+
+t(c)=o(n)
+s(c)=0(n)
