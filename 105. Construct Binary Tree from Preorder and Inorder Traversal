@@ -1,0 +1,64 @@
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, 
+construct and return the binary tree.
+
+ Example 1:
+ inorder[40,20,50,10,60,30] // left root,right
+ preorder[10,20,40,50,30,60] // root,left,right
+ 
+ apporch using two pointer one points to prest and another preend
+ apporch using two pointer one points to inst and another inend
+ 
+ root points preorder st and search it is in inorder if it find its left new inorrderleft and right new inorder right
+for preorder  left is st three after root and right is rest ele 
+
+ TreeNode*buildTree(vector<int>& preorder,int prest,int preend,vector<int>& inorder,int inst ,int inend,unordered_map<int,int>&m)
+    {
+        if(prest>preend||inst>inend) return NULL;
+        TreeNode*root=new TreeNode(preorder[prest]);
+        int inroot=m[root->val];
+        int numsleft=inroot-inst;
+        root->left=buildTree(preorder,prest+1,prest+numsleft,inorder,inst,inroot-1,m);
+        root->right=buildTree(preorder,prest+numsleft+1,preend,inorder,inroot+1,inend,m);
+        return root;
+    }
+   
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int,int>m;
+        for(int i=0;i<inorder.size();i++)
+        {
+            m[inorder[i]]=i;
+        }
+ return buildTree(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1,m);
+    }
+    
+    t(c)=o(n)+o(n) //  map + for every node go tpo left and right recursion
+    s(c)=o(n)+o(n)
+   
+   
+   
+    106. Construct Binary Tree from Inorder and Postorder Traversal
+    inorder:[40,20,50,10,60,30]
+    post:[40,50,20,60,30,10]
+    
+     TreeNode *buildTree(vector<int>& inorder,int inst,int inend,vector<int>& postorder,int postst,int postend,map<int,int>&m)
+    {
+        if(inst >inend || postst>postend) return NULL;
+        TreeNode*root=new TreeNode(postorder[postend]);
+        int inroot=m[root->val];
+        int numsleft=inroot-inst;
+ root->left=buildTree(inorder,inst,inst+numsleft-1,postorder,postst,postst+numsleft-1,m);
+root->right=buildTree(inorder,inroot+1,inend,postorder,postst+numsleft,postend-1,m);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        map<int,int>m;
+        for(int i=0;i<inorder.size();i++)
+        {
+            m[inorder[i]]=i;
+        }
+       return buildTree(inorder,0,inorder.size()-1,postorder,0,postorder.size()-1,m);
+    }
+    
+    // same apporch for this also
+
+    
