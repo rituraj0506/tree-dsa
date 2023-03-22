@@ -1,0 +1,34 @@
+Given an array of integers preorder, which represents the preorder traversal of a BST (i.e., binary search tree), construct the tree and return its root.
+It is guaranteed that there is always possible to find a binary search tree with the given requirements for the given test cases.
+A binary search tree is a binary tree where for every node, any descendant of Node.left has a value strictly less than Node.val, and any descendant of Node.right has a value strictly greater than Node.val.
+A preorder traversal of a binary tree displays the value of the node first, then traverses Node.left, then traverses Node.right.
+
+Input: preorder = [8,5,1,7,10,12]
+Output: [8,5,10,1,7,null,12]
+apporch 1: sort the array and it gives me inorder store in sum array 
+after that we have two array preorder and inorder from this we construct tree
+
+t(c)=o(nlogn)+o(n)
+s(c)=o(n)
+
+approch 2: 
+we take a pointer start with index 0 and we have int_max as upper bound after thet we shift nodeval to bound for left subtree if any val greater than this bound 
+return Null and back track and check for right
+
+t(c)=o(n)
+s(c)=o(n) // recursion stack space
+
+TreeNode*buildTree(vector<int>& preorder,int &i,int bound)
+    {
+        // if any chance i==n means out of size
+        if(i==preorder.size()||preorder[i]>bound) return NULL;
+        TreeNode*node=new TreeNode(preorder[i++]);
+        node->left=buildTree(preorder,i,node->val);
+        node->right=buildTree(preorder,i,bound);
+        return node;
+    }
+    
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int i=0;
+        return buildTree(preorder,i,INT_MAX);
+    }
